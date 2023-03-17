@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import sys
 
 class Base_command():
     """Base class for all commands."""
@@ -15,3 +16,5 @@ class Command(Base_command):
 
     def run(self):
         print(f"Running the {self.keyword} command.")
+        if self.keyword == "escape":
+            sys.exit()

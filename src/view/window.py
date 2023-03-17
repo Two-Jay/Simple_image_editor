@@ -3,6 +3,7 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtGui import QIcon, QAction, QPalette, QColor
 from PyQt6.QtCore import Qt, QSize
+from view.shortcut import Shortcut_manager
 from core.command import Command
 
 import os
@@ -17,14 +18,8 @@ class Window(QMainWindow):
         self.setStatusBar(QStatusBar(self))
 
     def keyPressEvent(self, event):
-        pressed_key = event.key()
-        pressed_modifiers = event.modifiers()
-        if pressed_key == Qt.Key.Key_Escape:
-            self.close()
-        if pressed_key == Qt.Key.Key_S and pressed_modifiers == Qt.KeyboardModifier.ControlModifier:
-            Command("save").run()
-        if pressed_key == Qt.Key.Key_O and pressed_modifiers == Qt.KeyboardModifier.ControlModifier:
-            Command("open").run()
+        Shortcut_manager.run_shortcut_command(event.key(), event.modifiers())
+        
 
 class ToolBarButton(QAction):
     def __init__(self, icon, text, callback):
