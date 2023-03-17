@@ -19,7 +19,6 @@ class Window(QMainWindow):
 
     def keyPressEvent(self, event):
         Shortcut_manager.run_shortcut_command(event.key(), event.modifiers())
-        
 
 class ToolBarButton(QAction):
     def __init__(self, icon, text, callback):
@@ -37,19 +36,37 @@ class ToolBar(QToolBar):
         self.setIconSize(QSize(height - 8, height - 8))
 
         current_dir = os.getcwd()
+        image_folder_path = os.path.join(current_dir, "resources/icons")
         print(f"Current directory: {current_dir + '/resources/icons/save.png'}")
 
         self.addToolBarButton(
-            QIcon(current_dir + "/resources/icons/save.png"),
+            QIcon(image_folder_path + "/save.png"),
             "Save",
             Command("save").run
         )
         self.addSeparator()
         self.addToolBarButton(
-            QIcon(current_dir + "resources/icons/open.png"),
+            QIcon(image_folder_path + "/open.png"),
             "Open",
             Command("open").run
         )
+        self.addSeparator()
+        self.addToolBarButton(
+            QIcon(image_folder_path + "/zoomin.png"),
+            "Zoom in",
+            Command("zoomin").run
+        )
+        self.addToolBarButton(
+            QIcon(image_folder_path + "/zoomout.png"),
+            "Zoom out",
+            Command("zoomout").run
+        )
+        self.addToolBarButton(
+            QIcon(image_folder_path + "/rotate_toolbar.png"),
+            "Rotate",
+            Command("rotate").run
+        )
+        self.addSeparator()
 
     def addToolBarButton(self, icon, text, callback):
         self.addAction(ToolBarButton(icon, text, callback))
