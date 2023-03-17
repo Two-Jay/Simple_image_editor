@@ -4,7 +4,9 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtGui import QIcon, QAction, QPalette, QColor
 from PyQt6.QtCore import Qt, QSize
 from view.shortcut import Shortcut_manager
-from core.command import Command
+from core.command import (
+    Exit_command, Save_command, Open_command
+)
 
 import os
 
@@ -37,34 +39,18 @@ class ToolBar(QToolBar):
 
         current_dir = os.getcwd()
         image_folder_path = os.path.join(current_dir, "resources/icons")
-        print(f"Current directory: {current_dir + '/resources/icons/save.png'}")
+        print(f"image_folder_path : {image_folder_path}")
 
         self.addToolBarButton(
             QIcon(image_folder_path + "/save.png"),
             "Save",
-            Command("save").run
+            Save_command().run
         )
         self.addSeparator()
         self.addToolBarButton(
             QIcon(image_folder_path + "/open.png"),
             "Open",
-            Command("open").run
-        )
-        self.addSeparator()
-        self.addToolBarButton(
-            QIcon(image_folder_path + "/zoomin.png"),
-            "Zoom in",
-            Command("zoomin").run
-        )
-        self.addToolBarButton(
-            QIcon(image_folder_path + "/zoomout.png"),
-            "Zoom out",
-            Command("zoomout").run
-        )
-        self.addToolBarButton(
-            QIcon(image_folder_path + "/rotate_toolbar.png"),
-            "Rotate",
-            Command("rotate").run
+            Open_command().run
         )
         self.addSeparator()
 

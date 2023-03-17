@@ -1,20 +1,32 @@
 from abc import ABC, abstractmethod
 import sys
 
-class Base_command():
-    """Base class for all commands."""
-
-    @abstractmethod
-    def run(self):
-        """Run the command."""
-        pass
-
-class Command(Base_command):
+class Command(ABC):
     keyword = ""
     def __init__(self, keyword):
         self.keyword = keyword
 
+    @abstractmethod
     def run(self):
-        print(f"Running the {self.keyword} command.")
-        if self.keyword == "escape":
-            sys.exit()
+        pass
+
+class Exit_command(Command):
+    def __init__(self):
+        super(Exit_command, self).__init__("exit")
+
+    def run(self):
+        sys.exit()
+
+class Save_command(Command):
+    def __init__(self):
+        super(Save_command, self).__init__("save")
+
+    def run(self):
+        print(f"{type(self).__name__} : {self.keyword} command is running.")
+
+class Open_command(Command):
+    def __init__(self):
+        super(Open_command, self).__init__("open")
+
+    def run(self):
+        print(f"{type(self).__name__} : {self.keyword} command is running.")
