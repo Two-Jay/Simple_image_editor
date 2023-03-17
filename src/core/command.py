@@ -15,12 +15,9 @@ class Base_command():
         pass
 
 class Command(Base_command):
-    """Command class for the 'test' command."""
-    def _validate_args(self):
-        """Validate the arguments passed to the command."""
-        if not self.args:
-            raise ValueError("No arguments passed to the command.")
+    keyword = ""
+    def _validate_args(self, command : str):
+        self.keyword = command
 
     def run(self):
-        """Run the command."""
-        print("Running the 'test' command.")
+        print(f"Running the {self.keyword} command.")

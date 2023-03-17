@@ -1,6 +1,5 @@
 from PIL import Image
 
-
 class ImageLoader():
     def __init__(self):
         self.image = None
@@ -13,11 +12,14 @@ class ImageLoader():
         if self.image:
             self.image.close()
 
+    def get_image(self):
+        return self.image
+
 class ImageManager():
     def __init__(self):
         self.image = None
 
     def load_image(self):
         with ImageLoader() as loader:
-            self.image = loader.image
+            self.image = loader.get_image()
             self.image.show()
