@@ -5,7 +5,7 @@ from PyQt6.QtGui import QIcon, QAction, QPalette, QColor
 from PyQt6.QtCore import Qt, QSize
 from view.shortcut import Shortcut_manager
 from core.command import (
-    Exit_command, Save_command, Open_command
+    Save_command, Open_command
 )
 
 import os
